@@ -13,7 +13,7 @@ This repository contains a collection of machine learning projects demonstrating
 ### 2. Space Titanic Classification
 🚀 Binary classification project predicting passenger survival on the Space Titanic.
 - Techniques: Classification, Data Preprocessing
-- [View Project Details](./space_titanic/README.md)
+- [View Project Details](./space_titanic/notebooks/README.md)
 
 ### 3. Heart Disease Prediction
 ❤️ Medical diagnosis prediction using machine learning algorithms.

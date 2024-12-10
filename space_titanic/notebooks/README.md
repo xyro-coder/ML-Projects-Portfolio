@@ -1,62 +1,118 @@
-# Machine Learning Projects Portfolio
+# Space Transport Prediction Project
 
 ## Overview
-This repository contains a collection of machine learning projects demonstrating proficiency in various ML techniques and problem types. Each project is fully documented with its own detailed README, requirements, and implementation.
+This project implements a machine learning pipeline to predict passenger transportation outcomes in space travel using XGBoost classification. It features custom transformers for data preprocessing and handles various types of input data including numerical, binary, and categorical features.
 
-## Projects
+## Features
+- Custom transformation pipeline
+- Numerical data imputation
+- Binary data conversion
+- Categorical data encoding
+- XGBoost classification
+- Model performance evaluation using ROC AUC
 
-### 1. Housing Price Prediction
-🏠 A regression model predicting housing prices based on various features and market conditions.
-- Techniques: Advanced Regression, Feature Engineering
-- [View Project Details](./housing_predictions/README.md)
+## Dependencies
+- pandas
+- numpy
+- xgboost
+- scikit-learn
 
-### 2. Space Titanic Classification
-🚀 Binary classification project predicting passenger survival on the Space Titanic.
-- Techniques: Classification, Data Preprocessing
-- [View Project Details](./space_titanic/README.md)
+## Dataset
+The project uses a space transport dataset with the following key features:
+- PassengerId
+- HomePlanet
+- CryoSleep
+- Cabin
+- Destination
+- Age
+- VIP
+- RoomService
+- FoodCourt
+- ShoppingMall
+- Spa
+- VRDeck
+- Name
+- Transported (target variable)
 
-### 3. Heart Disease Prediction
-❤️ Medical diagnosis prediction using machine learning algorithms.
-- Techniques: Binary Classification, Healthcare Analytics
-- [View Project Details](./heart_disease/README.md)
+## Custom Transformers
+The project implements three custom transformer classes:
 
-## Technologies Used
-- Python 3.x
-- Scikit-learn
-- Pandas
-- NumPy
-- Jupyter Notebook
-- Matplotlib/Seaborn
+1. `Numerical_Imputer`:
+   - Handles missing values in numerical columns
+   - Uses median strategy for imputation
+   - Processes: Age, RoomService, FoodCourt, ShoppingMall, Spa, VRDeck
 
-## Getting Started
-1. Clone this repository
+2. `Binary_converter`:
+   - Converts boolean values to binary (0/1)
+   - Processes: CryoSleep
+
+3. `OneHotEncode`:
+   - Performs one-hot encoding for categorical variables
+   - Processes: HomePlanet, Destination, VIP
+
+## Pipeline Architecture
+```python
+pipeline = Pipeline(steps=[
+    ('numerical_imputer', Numerical_Imputer()),
+    ('binary_converter', Binary_converter()),
+    ('one_hot_encoder', OneHotEncode())
+])
+```
+
+## Model Configuration
+XGBoost Classifier parameters:
+- n_estimators: 100
+- learning_rate: 0.1
+- max_depth: 6
+- random_state: 42
+
+## Usage
+
+1. Install required packages:
 ```bash
-git clone https://github.com/xyro-coder/ML-Projects-Portfolio.git
+pip install pandas numpy xgboost scikit-learn
 ```
 
-2. Install dependencies
-```bash
-pip install -r requirements.txt
+2. Load and prepare the data:
+```python
+train_data = pd.read_csv('train.csv')
+test_data = pd.read_csv('test.csv')
+
+X = train_data.drop(['Transported', 'PassengerId', 'Name', 'Cabin'], axis=1)
+y = train_data['Transported']
 ```
 
-3. Navigate to individual project directories for specific instructions
+3. Split the data:
+```python
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+```
 
-## Repository Structure
+4. Run the pipeline and train the model:
+```python
+# Transform data
+X_transformed = pipeline.fit_transform(X_train)
+
+# Train model
+xgb.fit(X_transformed, y_train)
+
+# Make predictions
+y_pred = xgb.predict(pipeline.transform(X_test))
 ```
-ML-Projects-Portfolio/
-├── housing_predictions/
-│   ├── notebooks/
-│   │   └── housing_prediction.ipynb
-│   ├── src/
-│   │   └── pipeline.py
-│   └── README.md
-├── space_titanic/
-│   ├── notebooks/
-│   │   └── space_titanic.ipynb
-│   ├── src/
-│   │   └── transformers.py
-│   └── README.md
-└── heart_disease/
-    ├── notebooks/
-    └── README.md
+
+5. Evaluate the model:
+```python
+y_pred_proba = xgb.predict_proba(pipeline.transform(X_test))[:, 1]
+roc_auc = roc_auc_score(y_test, y_pred_proba)
 ```
+
+## Model Performance
+The model's performance is evaluated using ROC AUC score, which measures the model's ability to distinguish between transportation outcomes.
+
+## Data Preprocessing Steps
+1. Removal of irrelevant columns (PassengerId, Name, Cabin)
+2. Imputation of missing values in numerical columns
+3. Conversion of boolean values to binary integers
+4. One-hot encoding of categorical variables
+5. Feature transformation through the custom pipeline
