@@ -1,62 +1,98 @@
-# Machine Learning Projects Portfolio
+# Heart Disease Prediction Project
 
 ## Overview
-This repository contains a collection of machine learning projects demonstrating proficiency in various ML techniques and problem types. Each project is fully documented with its own detailed README, requirements, and implementation.
+This project implements various machine learning models to predict heart disease using patient health data. The implementation includes data preprocessing, feature engineering, exploratory data analysis (EDA), and model evaluation using multiple classification algorithms.
 
-## Projects
+## Features
+- Data preprocessing and cleaning
+- Feature engineering with health-specific metrics
+- Comprehensive EDA with visualizations
+- Multiple classification models:
+  - Logistic Regression
+  - Random Forest
+  - Decision Tree
+  - Support Vector Classification (SVC)
+- Model evaluation using accuracy and ROC-AUC scores
 
-### 1. Housing Price Prediction
-🏠 A regression model predicting housing prices based on various features and market conditions.
-- Techniques: Advanced Regression, Feature Engineering
-- [View Project Details](./housing_predictions/README.md)
+## Dependencies
+- pandas
+- seaborn
+- matplotlib
+- numpy
+- scikit-learn
 
-### 2. Space Titanic Classification
-🚀 Binary classification project predicting passenger survival on the Space Titanic.
-- Techniques: Classification, Data Preprocessing
-- [View Project Details](./space_titanic/README.md)
+## Dataset
+The project uses a heart disease dataset with the following features:
+- Age
+- Sex
+- Chest Pain Type (cp)
+- Resting Blood Pressure (trestbps)
+- Cholesterol (chol)
+- Fasting Blood Sugar (fbs)
+- Resting ECG (restecg)
+- Maximum Heart Rate (thalach)
+- Exercise Induced Angina (exang)
+- ST Depression (oldpeak)
+- Slope of Peak Exercise ST Segment
+- Number of Major Vessels (ca)
+- Thalassemia (thal)
+- Target (heart disease presence)
 
-### 3. Heart Disease Prediction
-❤️ Medical diagnosis prediction using machine learning algorithms.
-- Techniques: Binary Classification, Healthcare Analytics
-- [View Project Details](./heart_disease/README.md)
+## Feature Engineering
+The project includes several engineered features:
+1. Blood Pressure Categories:
+   - Healthy_Trestbps
+   - Elevated_Trestbps
+   - Stage_1_Hypertension
+   - Stage_2_Hypertension
 
-## Technologies Used
-- Python 3.x
-- Scikit-learn
-- Pandas
-- NumPy
-- Jupyter Notebook
-- Matplotlib/Seaborn
+2. Age-related Combinations:
+   - Age_Chol
+   - Age_Thalach
+   - Age_Trestbps
 
-## Getting Started
-1. Clone this repository
+3. Cholesterol Categories:
+   - Normal_Chol
+   - Borderline_High_Chol
+   - High_Chol
+
+## Model Selection
+The project implements a comparative analysis of multiple classification models:
+- Logistic Regression
+- Random Forest Classifier
+- Decision Tree Classifier
+- Support Vector Classifier (SVC)
+
+Each model is evaluated using:
+- Accuracy Score
+- ROC-AUC Score
+- Average of both scores for final comparison
+
+## Usage
+1. Ensure all dependencies are installed:
 ```bash
-git clone https://github.com/xyro-coder/ML-Projects-Portfolio.git
+pip install pandas seaborn matplotlib numpy scikit-learn
 ```
 
-2. Install dependencies
-```bash
-pip install -r requirements.txt
+2. Load and preprocess the data:
+```python
+df = pd.read_csv("heart.csv")
 ```
 
-3. Navigate to individual project directories for specific instructions
+3. Run the feature engineering and model selection:
+```python
+# Run main accuracy comparison
+best_classifier, best_accuracy = main_accuracy()
+```
 
-## Repository Structure
-```
-ML-Projects-Portfolio/
-├── housing_predictions/
-│   ├── notebooks/
-│   │   └── housing_prediction.ipynb
-│   ├── src/
-│   │   └── pipeline.py
-│   └── README.md
-├── space_titanic/
-│   ├── notebooks/
-│   │   └── space_titanic.ipynb
-│   ├── src/
-│   │   └── transformers.py
-│   └── README.md
-└── heart_disease/
-    ├── notebooks/
-    └── README.md
-```
+## Visualizations
+The project includes various visualizations:
+- Distribution plots for numerical features
+- Pair plots for feature relationships
+- Correlation heatmaps
+- Feature importance analysis using mutual information
+
+## Data Split and Scaling
+- Train-validation split: 70-30
+- Standard scaling applied to features
+- Random state set to 42 for reproducibility
