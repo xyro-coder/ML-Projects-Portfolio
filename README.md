@@ -1,7 +1,7 @@
 # Machine Learning Projects Portfolio
 
 ## Overview
-This repository contains a collection of machine learning projects demonstrating proficiency in various ML techniques and problem types. Each project is fully documented with its own detailed README, requirements, and implementation.
+A variety of machine learning projects showcasing expertise in different ML approaches and issue types may be found in this repository. Every project has a thorough README, requirements, and implementation that are all documented.
 
 ## Projects
 
