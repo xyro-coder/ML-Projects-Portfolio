@@ -5,26 +5,32 @@ A variety of machine learning projects showcasing expertise in different ML appr
 
 ## Projects
 
-### 1. Housing Price Prediction
+### 1. Deep Neural Network from Scratch for MNIST
+🧠 A fully vectorized deep feedforward neural network built entirely from first principles using NumPy, achieving ~91% accuracy on MNIST digit classification without using any deep learning libraries.
+- Techniques: Backpropagation, Custom Adam Optimization, Matrix-based Operations
+- [View Project Details](./Neural_Network_From_Scratch/README.md)
+
+### 2. Housing Price Prediction
+
 🏠 A regression model predicting housing prices based on various features and market conditions.
 - Techniques: Advanced Regression, Feature Engineering
 - [View Project Details](./housing_predictions/README.md)
 
-### 2. Space Titanic Classification
+### 3. Space Titanic Classification
 🚀 Binary classification project predicting passenger survival on the Space Titanic.
 - Techniques: Classification, Data Preprocessing
 - [View Project Details](./space_titanic/notebooks/README.md)
 
-### 3. Heart Disease Prediction
+### 4. Heart Disease Prediction
 ❤️ Medical diagnosis prediction using machine learning algorithms.
 - Techniques: Binary Classification, Healthcare Analytics
 - [View Project Details](./heart_disease/README.md)
 
 ## Technologies Used
 - Python 3.x
+- NumPy
 - Scikit-learn
 - Pandas
-- NumPy
 - Jupyter Notebook
 - Matplotlib/Seaborn
 
@@ -44,19 +50,17 @@ pip install -r requirements.txt
 ## Repository Structure
 ```
 ML-Projects-Portfolio/
+├── Neural_Network_From_Scratch/
+│   ├── mnist_nn.ipynb
+│   └── README.md
 ├── housing_predictions/
-│   ├── notebooks/
-│   │   └── housing_prediction.ipynb
-│   ├── src/
-│   │   └── pipeline.py
+│   ├── housing_prediction.ipynb
 │   └── README.md
 ├── space_titanic/
 │   ├── notebooks/
 │   │   └── space_titanic.ipynb
-│   ├── src/
-│   │   └── transformers.py
 │   └── README.md
 └── heart_disease/
-    ├── notebooks/
+    ├── heart_disease_prediction.ipynb
     └── README.md
 ```
